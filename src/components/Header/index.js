@@ -27,12 +27,12 @@ const Header = props => {
             </Link>
           </li>
           <li>
-            <Link to="/products" className="nav-link">
+            <Link to="/services" className="nav-link">
               Services
             </Link>
           </li>
           <li>
-            <Link to="/cart" className="nav-link">
+            <Link to="/about" className="nav-link">
               About Us
             </Link>
           </li>

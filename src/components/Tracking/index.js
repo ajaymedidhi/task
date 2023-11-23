@@ -1,11 +1,3 @@
-const Tracking = props => {
-  const {trackData} = props
-  const {refId, location, status, orderDate, time} = trackData
-  return (
-    <div>
-      <li>{location}</li>
-    </div>
-  )
-}
+const Tracking = () => <h1>h</h1>
 
 export default Tracking
