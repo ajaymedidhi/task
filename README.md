@@ -8,6 +8,18 @@ The goal of this project was to create a user-friendly courier tracking system w
 
 ## Features
 
+## Login Credentials 
+
+user:      rahul 
+password:    rahul@2021 
+
+## Deployed Project 
+
+[My Victaman Assignment Project ](https://assignmentajay7.ccbp.tech/login)
+
+
+
+
 ### Frontend (React)
 
 - User-friendly interface for tracking courier packages.
