@@ -8,7 +8,7 @@ import AboutUs from '../AboutUs'
 import './index.css'
 
 class Home extends Component {
-  state = {inputEl: '', trackingData: [], t: false}
+  state = {inputEl: '', trackingData: []}
 
   componentDidMount() {
     this.getTrackingData()
@@ -31,7 +31,7 @@ class Home extends Component {
   }
 
   render() {
-    const {inputEl, t, trackingData} = this.state
+    const {inputEl, trackingData} = this.state
     console.log(inputEl)
 
     return (
@@ -65,14 +65,7 @@ class Home extends Component {
                 </button>
               </form>
             </div>
-
-            {t ? (
-              <ul>
-                {trackingData.map(item => (
-                  <Tracking trackData={item} key={item.refId} />
-                ))}
-              </ul>
-            ) : null}
+                    
           </div>
           <img
             src="https://img.freepik.com/free-vector/warehouse-worker-transporting-goods-freight-shipping-types-business-logistics-smart-logistics-technologies-commercial-delivery-service-concept-pinkish-coral-bluevector-isolated-illustration_335657-1728.jpg"
