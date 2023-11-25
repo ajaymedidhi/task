@@ -8,31 +8,41 @@ import AboutUs from '../AboutUs'
 import './index.css'
 
 class Home extends Component {
-  state = {inputEl: '', trackingData: []}
-
-  componentDidMount() {
-    this.getTrackingData()
+  state = {
+    trackingDetails: '',
+    trackingData: null,
+    array: [],
   }
 
-  onTracking = e => {
-    this.setState({inputEl: e.target.value})
-    this.getTrackingData()
+  handleChange = event => {
+    this.setState({ trackingDetails: event.target.value })
   }
 
-  getTrackingData = async () => {
-    const {inputEl} = this.state
-    const response = await fetch(
-      `https://backendcode-production-49b4.up.railway.app/details/${inputEl}`,
-    )
-    const statusCode = await response.statusCode
+  handleSubmit = async event => {
+    event.preventDefault();
+    const { trackingDetails } = this.state;
 
-    const data = await response.json()
-    this.setState({trackingData: [data]})
+    try {
+      const response = await fetch(`https://backendcode-production-49b4.up.railway.app/details/${trackingDetails}`);
+      if (!response.ok) {
+        throw new Error('Network response was not ok.');
+      }
+      const data = await response.json();
+      const formattedData = data.map(eachItem => ({
+        refId: eachItem.ref_id,
+        location: eachItem.location,
+        status: eachItem.status,
+        orderDate: eachItem.order_date,
+        time: eachItem.time,
+      }));
+
+      this.setState({ trackingData: data, array: formattedData });
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      this.setState({ trackingData: null, array: [] });
+    }
   }
 
-  render() {
-    const {inputEl, trackingData} = this.state
-    console.log(inputEl)
 
     return (
       <>
@@ -49,23 +59,20 @@ class Home extends Component {
             />
 
             <div>
-              <form className="form-cont" onSubmit={this.getTrackingData}>
-                <input
-                  onChange={this.onTracking}
-                  type="text"
-                  value={inputEl}
-                  placeholder="Enter Tracking Details"
-                />
-                <button
-                  type="submit"
-                  onClick={this.onToggle}
-                  className="shop-now-button"
-                >
-                  Track Now
-                </button>
-              </form>
+               <form className="form-cont" onSubmit={this.handleSubmit}>
+                  <input
+                    className="input-field"
+                    type="text"
+                    placeholder="Enter Tracking Details"
+                    value={trackingDetails}
+                    onChange={this.handleChange}
+                  />
+                  <button className="shop-now-button" type="submit">
+                    Track Now
+                  </button>
+             </form>
             </div>
-                    
+          {<TrackingDetails trackingData={array} />  }   
           </div>
           <img
             src="https://img.freepik.com/free-vector/warehouse-worker-transporting-goods-freight-shipping-types-business-logistics-smart-logistics-technologies-commercial-delivery-service-concept-pinkish-coral-bluevector-isolated-illustration_335657-1728.jpg"
