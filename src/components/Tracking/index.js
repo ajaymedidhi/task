@@ -1,7 +1,3 @@
-const Tracking = () => <h1>h</h1>
-
-export default Tracking
-
 
 import React from 'react';
 import { Chrono } from 'react-chrono';
